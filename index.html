@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread Sheet Form Demo</title>
+    <link rel="stylesheet" href="./assets/CSS/style.css">
+</head>
+<body>
+    <div class="container">
+        <form action="response.html" autocomplete="off" method="post" name="submit-to-google-sheet">
+           <center> <h3>Contact Form</h3></center>
+            <input type="text" placeholder="Enter Name" name="student_name" required/>
+            <input type="email" placeholder="Enter Email-Id" name="email" required/>
+            <input type="number" placeholder="Enter Number" name="number" required/>
+            <select name="degree" required>
+                <option value="Not Selcted">College Name</option>
+                <option value="BCS">B.C.S</option>
+                <option value="BA">B.A</option>
+                <option value="BCOM">B.COM</option>
+            </select>
+            <textarea placeholder="Enter Message" name="message" required></textarea>
+            <button type="submit" name="submit">Submit</button>
+            <button type="reset" class="reset">Reset</button>
+        </form>
+    </div>
+    
+//         <form name="submit-to-google-sheet">
+//   <input name="email" type="email" placeholder="Email" required>
+//   <button type="submit">Send</button>
+// </form>
+
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyZYpOQYhYt9dzKYEAAznwwDUGrVlhBIseCDkYnqWSNNuDrbHBmhH7uf9z6TFlHym4I7g/exec'
+  const form = document.forms['submit-to-google-sheet']
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+     //.then(response => console.log('Success!', response))
+     .then(response => window.location.href="response.html")
+     .catch(error => console.error('Error!', error.message))
+    
+  })
+</script>
+    
+    
+</body>
+</html>
